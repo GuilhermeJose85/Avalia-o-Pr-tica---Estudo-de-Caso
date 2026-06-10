@@ -1,196 +1,27 @@
-import React from "react";
-import { View, FlatList } from "react-native";
-import Jogo from "./components/Jogos";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import Home from './telas/Home';
+import Detalhes from './telas/Detalhes';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const jogos = [
-    {
-      id: "1",
-      nome: "Minecraft",
-      categoria: "Sandbox",
-      plataforma: "PC",
-      descricao: "Minecraft é um jogo eletrônico sandbox de sobrevivência de 2011 desenvolvido e publicado pela desenvolvedora sueca Mojang Studios.",
-      imagem: "https://i.imgur.com/wuNg5tZ.jpeg",
-      data: "17 de maio de 2009.",
-    },
-    {
-      id: "2",
-      nome: "God Of War 2018",
-      categoria: "Ação-aventura / Hack and Slash / RPG eletrônico de ação.",
-      plataforma: "PlayStation 4, PlayStation 5 (via retrocompatibilidade) e PC (Windows).",
-      descricao: "Kratos agora vive no reino nórdico e viaja com seu filho, Atreus, para espalhar as cinzas de sua falecida esposa no pico mais alto dos reinos, enfrentando deuses e monstros enquanto tenta superar seu passado violento.",
-      imagem: "https://i.imgur.com/X5n1a4Y.jpeg",
-      data: "20 de abril de 2018.",
-    },
-    {
-      id: "3",
-      nome: "EA FC 26",
-      categoria: "Esporte / Simulador de Futebol.",
-      plataforma: "PlayStation 5, PlayStation 4, Xbox Series X/S, Xbox One, PC (Windows) e Nintendo Switch.",
-      descricao: "Sequência da famosa franquia de futebol da EA Sports, o jogo traz atualizações de elencos globais, melhorias gráficas e evoluções nos modos de jogo tradicionais como o Ultimate Team, Carreira e o modo Rush.",
-      imagem: "https://i.imgur.com/sz5yNQ9.jpeg",
-      data: "Setembro de 2025.",
-    },
-    {
-      id: "4",
-      nome: "GTA V",
-      categoria: "Ação-aventura / Mundo aberto.",
-      plataforma: "PlayStation 3, Xbox 360, PlayStation 4, Xbox One, PC (Windows), PlayStation 5 e Xbox Series X/S.",
-      descricao: "O jogo acompanha a história de três criminosos com origens bem diferentes — Michael, Franklin e Trevor — que realizam uma série de assaltos perigosos na fictícia cidade de Los Santos, enquanto lidam com o governo e o crime organizado.",
-      imagem: "https://i.imgur.com/sfPDbQi.jpeg",
-      data: "17 de setembro de 2013.",
-    },
-    {
-      id: "5",
-      nome: "Uncharted 4: A Thief's End",
-      categoria: "Ação-aventura / Tiro em terceira pessoa.",
-      plataforma: "PlayStation 4, PlayStation 5 e PC (Windows).",
-      descricao: "Vários anos após sua última aventura, o caçador de tesouros aposentado Nathan Drake é forçado a voltar ao mundo dos ladrões quando seu irmão, que ele acreditava estar morto, reaparece pedindo ajuda para encontrar o lendário tesouro pirata de Libertalia",
-      imagem: "https://i.imgur.com/kjwyhGy.jpeg",
-      data: "10 de maio de 2016.",
-    },
-    {
-      id: "6",
-      nome: "The Last Of Us 2",
-      categoria: "Ação-aventura / Survival Horror / Stealth.",
-      plataforma: "PlayStation 4 e PlayStation 5.",
-      descricao: "Cinco anos após a jornada do primeiro jogo, um evento violento e traumático destrói a paz que Ellie havia encontrado em Jackson. Ela parte em uma jornada implacável de vingança por Seattle, enfrentando facções rivais, infectados e o peso devastador de suas próprias escolhas.",
-      imagem: "https://i.imgur.com/LzSENSo.jpeg",
-      data: "19 de junho de 2020",
-    },
-    {
-      id: "7",
-      nome: "Spider Man 1",
-      categoria: "Ação-aventura / Mundo aberto.",
-      plataforma: "PlayStation 4, PlayStation 5 e PC (Windows).",
-      descricao: "No controle de um Peter Parker já experiente, você precisa equilibrar a vida pessoal caótica do herói com o dever de proteger Nova York. O jogo traz uma mecânica fluida de teias e combate ágil enquanto o Aranha enfrenta uma coalizão de seus vilões mais icônicos, liderada pelo Senhor Negativo.",
-      imagem: "https://i.imgur.com/tWgVa6v.jpeg",
-      data: "7 de setembro de 2018",
-    },
-    {
-      id: "8",
-      nome: "Alan Wake",
-      categoria: "Survival Horror / Thriller Psicológico / Ação.",
-      plataforma: "Xbox 360, PC (Windows), PlayStation 4, PlayStation 5, Xbox One, Xbox Series X/S e Nintendo Switch.",
-      descricao: "O escritor de suspense Alan Wake viaja para a pacata cidade de Bright Falls para tentar superar um bloqueio criativo. Quando sua esposa desaparece misteriosamente, ele se vê preso em um pesadelo vivo onde as páginas de um livro de terror que ele não se lembra de ter escrito começam a se tornar realidade, forçando-o a usar a luz como sua principal arma contra a escuridão.",
-      imagem: "https://i.imgur.com/gS76oxi.jpeg",
-      data: "14 de maio de 2010",
-    },
-    {
-      id: "9",
-      nome: "Resident Evil 4 (Remake)",
-      categoria: "Survival Horror / Ação / Tiro em terceira pessoa. ",
-      plataforma: "PlayStation 4, PlayStation 5, Xbox Series X/S, PC (Windows), iOS, iPadOS e macOS.",
-      descricao: "O agente especial Leon S. Kennedy é enviado a uma isolada vila europeia para resgatar a filha do presidente dos EUA, que foi sequestrada. Lá, ele descobre que os habitantes locais foram infectados por um parasita terrível, em uma recriação moderna e aprimorada do clássico de 2005.",
-      imagem: "https://i.imgur.com/2Le0niY.jpeg",
-      data: "24 de março de 2023.",
-    },
-    {
-      id: "10",
-      nome: "Call of Duty: Modern Warfare 2",
-      categoria: "Tiro em primeira pessoa (FPS) / Ação.",
-      plataforma: "PC (Windows), PlayStation 3 e Xbox 360 (a versão de 2022 com o mesmo nome está disponível para PS4, PS5, Xbox One e Xbox Series X/S).",
-      descricao: "Continuando os eventos de Call of Duty 4, o jogo acompanha a força-tarefa militar Task Force 141, liderada pelo Capitão Soap MacTavish, caçando o líder terrorista russo Vladimir Makarov em uma campanha global cinematográfica e cheia de reviravoltas marcantes.",
-      imagem: "https://i.imgur.com/hMRzCSP.jpeg",
-      data: "10 de novembro de 2009",
-    },
-    {
-      id: "11",
-      nome: "The Sims 4",
-      categoria: "Simulador de vida / Estratégia.",
-      plataforma: "PC (Windows e macOS), PlayStation 4 e Xbox One.",
-      descricao: "O jogo permite criar e controlar pessoas virtuais (Sims), customizando desde suas aparências e personalidades até a construção de suas casas. Você gerencia suas carreiras, relacionamentos e rotinas diárias em um mundo aberto a infinitas possibilidades e expansões.",
-      imagem: "https://i.imgur.com/zwp2z6h.jpeg",
-      data: "2 de setembro de 2014.",
-    },
-    {
-      id: "12",
-      nome: "NBA 2K26",
-      categoria: "Esporte / Simulador de Basquete.",
-      plataforma: "PlayStation 5, PlayStation 4, Xbox Series X/S, Xbox One, PC (Windows), Nintendo Switch, Nintendo Switch 2 e dispositivos móveis (Apple Arcade/iOS).",
-      descricao: "O mais recente capítulo da maior franquia de basquete virtual traz atualizações completas de elencos da NBA e WNBA. Com a evolução da tecnologia ProPLAY, as animações e movimentos dos jogadores estão ainda mais realistas, aprimorando a jogabilidade tanto nos tradicionais modos de simulação (MyCAREER e MyTEAM) quanto nas quadras online da The City.",
-      imagem: "https://i.imgur.com/Yfb7cv6.jpeg",
-      data: "5 de setembro de 2025.",
-    },
-    {
-      id: "13",
-      nome: "Brawl Stars",
-      categoria: "MOBA / Tiro de herói / Battle Royale.",
-      plataforma: "Mobile",
-      descricao: "Desenvolvido pela Supercell, é um jogo de combate acelerado onde os jogadores escolhem personagens únicos (Brawlers) para disputar partidas em vários modos de jogo, como o combate 3v3 de coletas de gemas ou o clássico todos contra todos no estilo sobrevivência.",
-      imagem: "https://i.imgur.com/DNIZgjW.jpeg",
-      data: "12 de dezembro de 2018.",
-    },
-    {
-      id: "14",
-      nome: "Death Stranding",
-      categoria: "Ação-aventura / Ficção científica / Simulador de caminhada",
-      plataforma: "PlayStation 4, PlayStation 5, PC (Windows), iOS, iPadOS e macOS.",
-      descricao: "Criado por Hideo Kojima, o jogo acompanha Sam Porter Bridges em um futuro pós-apocalíptico onde o mundo dos vivos e dos mortos se fundiram. Sua missão é cruzar os Estados Unidos devastados para entregar suprimentos e reconectar as cidades isoladas através de uma rede de comunicação, enfrentando terrenos perigosos e criaturas sobrenaturais.",
-      imagem: "https://i.imgur.com/CFhkwdE.jpeg",
-      data: "8 de novembro de 2019",
-    },
-    {
-      id: "15",
-      nome: "Demon's Souls",
-      categoria: "RPG de ação / Hack and Slash / Soulslike.",
-      plataforma: "PlayStation 3 (versão original) e PlayStation 5 (versão Remake).",
-      descricao: "Onde tudo começou. No reino de Boletaria, um rei ganancioso liberta uma névoa sombria e o Antigo, uma criatura que consome as almas dos homens. O jogador controla um guerreiro solitário que deve enfrentar demônios terríveis em um combate estratégico, punitivo e sombrio para trazer a paz de volta ao reino.",
-      imagem: "https://i.imgur.com/NST4C1g.jpeg",
-      data: "5 de fevereiro de 2009",
-    },
-    {
-      id: "16",
-      nome: "Pokémon Trading Card Game Live",
-      categoria: "Jogo de cartas colecionáveis (TCG) / Estratégia. ",
-      plataforma: "PC (Windows e macOS), iOS e Android.PC",
-      descricao: "Substituto oficial do antigo Pokémon TCG Online, esta versão permite que os jogadores colecionem cartas digitais, montem baralhos e enfrentem treinadores do mundo inteiro. O jogo conta com um sistema de passes de batalha, customização de avatares em 3D e regras atualizadas fielmente com o jogo de cartas físico.",
-      imagem: "https://i.imgur.com/hOMUMGH.jpeg",
-      data: "8 de junho de 2023.",
-    },
-    {
-      id: "17",
-      nome: "Hollow Knight",
-      categoria: "Metroidvania / Plataforma / Soulslike.",
-      plataforma: "PC (Windows, macOS e Linux), Nintendo Switch, PlayStation 4 e Xbox One.",
-      descricao: "Um aclamado jogo indie que acompanha a jornada de um pequeno e silencioso cavaleiro pelo vasto e arruinado reino de Hallownest, um mundo subterrâneo habitado por insetos. O jogo se destaca por sua exploração labiríntica, atmosfera melancólica, trilha sonora marcante e combates altamente desafiadores contra chefes memoráveis.",
-      imagem: "https://i.imgur.com/zWja3ke.jpeg",
-      data: "24 de fevereiro de 2017.",
-    },
-    {
-      id: "18",
-      nome: "Red Dead Redemption 2",
-      categoria: "Ação-aventura / Mundo aberto / Velho Oeste.",
-      plataforma: "PlayStation 4, Xbox One e PC (Windows).",
-      descricao: "Ambientado no fim da era do Velho Oeste em 1899, o jogo conta a história de Arthur Morgan, um fora da lei que faz parte da gangue de Van der Linde. Após um roubo dar terrivelmente errado, o grupo precisa fugir pelos Estados Unidos enquanto enfrenta agentes federais, caçadores de recompensas e conflitos internos que ameaçam despedaçar a gangue.",
-      imagem: "https://i.imgur.com/0kWopKo.jpeg",
-      data: "26 de outubro de 2018.",
-    },
-    {
-      id: "19",
-      nome: "Horizon Forbidden West",
-      categoria: "RPG de ação / Aventura / Mundo aberto.",
-      plataforma: "PlayStation 4, PlayStation 5 e PC (Windows).",
-     descricao: 'Sequência direta de Horizon Zero Dawn, o jogo acompanha a caçadora Aloy em uma jornada perigosa pela fronteira do "Oeste Proibido". Ela busca encontrar a cura para uma misteriosa praga vermelha que está sufocando a vida na Terra, enfrentando tempestades devastadoras, novas facções de inimigos e máquinas ainda mais colossais e perigosas.',
-    },
-    {
-      id: "20",
-      nome: "Little Nightmares",
-      categoria: "Quebra-cabeça / Plataforma / Terror cinematográfico.",
-      plataforma: "PC (Windows), PlayStation 4, Xbox One, Nintendo Switch, iOS, Android e Stadia.",
-      descricao: "Um conto peculiar e macabro que confrontará você com os seus medos de infância. O jogo acompanha a jornada de Six, uma pequena garota vestindo uma capa de chuva amarela, que precisa escapar de The Maw (A Bocarra) — um vasto e misterioso navio habitado por almas corrompidas e criaturas grotescas em busca de sua próxima refeição.",
-      imagem: "https://i.imgur.com/fBVAGDx.jpeg",
-      data: "28 de abril de 2017.",
-    },
-  ];
-
   return (
-    <View style={{ flex: 1, marginTop: 40 }}>
-      <FlatList
-        data={jogos}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <Jogo {...item} />}
-      />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{ title: 'Joguinhos mais aquaticos ' }}
+        />
+
+        <Stack.Screen
+          name="Detalhes"
+          component={Detalhes}
+          options={{ title: '📖 Detalhes do Jogo' }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
